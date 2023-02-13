@@ -1,0 +1,27 @@
+﻿<Window x:Class="ToDoApplication.NewTaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDoApplication"
+        mc:Ignorable="d"
+        Title="New task" Height="350" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Margin="12,0,12,0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="SaveButton" Content="Save" Margin="0,0,8,12" MinWidth="70" Click="SaveButton_Click"/>
+            <Button x:Name="CancelButton" Content="Cancel" MinWidth="70" Margin="0,0,0,12" Click="CancelButton_Click"/>
+        </StackPanel>
+        <StackPanel Margin="12,12,12,12">
+            <TextBlock TextWrapping="Wrap" Height="18" FontWeight="Bold" Width="255"><Run Text="Name:"/><LineBreak/><Run/></TextBlock>
+            <TextBox x:Name="NameTextBox" TextWrapping="Wrap" Width="255" FontWeight="Bold" FontSize="14" TextChanged="NameTextBox_TextChanged"/>
+            <TextBlock TextWrapping="Wrap" Height="18" Margin="0,12,0,0" Width="255"><Run Text="Description:"/><LineBreak/><Run/></TextBlock>
+            <TextBox x:Name="DescriptionTextBox" TextWrapping="Wrap" Width="255" Height="105" AcceptsReturn="True"/>
+            <CheckBox x:Name="IsCompletedCheckBox" Content="Is completed" Margin="0,12,0,0" FontWeight="Bold" Width="255"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

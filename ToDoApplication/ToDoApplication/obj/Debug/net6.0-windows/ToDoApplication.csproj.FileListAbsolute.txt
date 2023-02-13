@@ -19,3 +19,5 @@ D:\Andrew\Programming\MyProjects\CBS_Net_Marathon\GIT\ToDoApplication\ToDoApplic
 D:\Andrew\Programming\MyProjects\CBS_Net_Marathon\GIT\ToDoApplication\ToDoApplication\obj\Debug\net6.0-windows\ToDoApplication.pdb
 D:\Andrew\Programming\MyProjects\CBS_Net_Marathon\GIT\ToDoApplication\ToDoApplication\obj\Debug\net6.0-windows\ToDoApplication.genruntimeconfig.cache
 D:\Andrew\Programming\MyProjects\CBS_Net_Marathon\GIT\ToDoApplication\ToDoApplication\obj\Debug\net6.0-windows\ref\ToDoApplication.dll
+D:\Andrew\Programming\MyProjects\CBS_Net_Marathon\GIT\ToDoApplication\ToDoApplication\obj\Debug\net6.0-windows\NewTaskWindow.g.cs
+D:\Andrew\Programming\MyProjects\CBS_Net_Marathon\GIT\ToDoApplication\ToDoApplication\obj\Debug\net6.0-windows\NewTaskWindow.baml

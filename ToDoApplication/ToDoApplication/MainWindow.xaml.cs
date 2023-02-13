@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace ToDoApplication
     public partial class MainWindow : Window
     {
 
-        List<Task> taskList = new List<Task>();
+        ObservableCollection<Task> taskList = new ObservableCollection<Task>();
 
         public MainWindow()
         {
@@ -52,5 +53,63 @@ namespace ToDoApplication
             }
 
         }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewTaskWindow window = new NewTaskWindow();
+            window.Owner = this;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            if (window.ShowDialog() == true)
+            {
+                taskList.Add(window.Result);  
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            int index = ToDoListBox.SelectedIndex;
+            if (index != -1)
+            {
+                taskList.RemoveAt(index);
+            }
+        }
+
+        private void CompleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            int index = ToDoListBox.SelectedIndex;
+            if (index != -1)
+            {
+                taskList[index].IsCompleted = !taskList[index].IsCompleted;
+            }
+
+            if (NotCompletedRadioButton.IsChecked.Value == true)
+            {
+                NotCompletedRadioButton_Checked(sender, e);
+            }
+
+            if (CompletedRadioButton.IsChecked.Value == true)
+            {
+                CompletedRadioButton_Checked(sender, e);
+            }
+        }
+
+        private void AllRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            ToDoListBox.ItemsSource = taskList;
+            CompleteButton.Content = "Complete";
+        }
+
+        private void NotCompletedRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            ToDoListBox.ItemsSource = taskList.Where(t => !t.IsCompleted);
+            CompleteButton.Content = "Complete";
+        }
+
+        private void CompletedRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            ToDoListBox.ItemsSource = taskList.Where(t => t.IsCompleted);
+            CompleteButton.Content = "Restore";
+        }
+
     }
 }
