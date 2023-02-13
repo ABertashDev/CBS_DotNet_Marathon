@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,19 +25,21 @@ namespace ToDoApplication
     public partial class MainWindow : Window
     {
 
+        private string fileName = "data.bin";
+
         ObservableCollection<Task> taskList = new ObservableCollection<Task>();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Task t1 = new Task("First task", "First task full description");
-            Task t2 = new Task("Second task", "Second task full description");
-            Task t3 = new Task("Third task", "Third task full description");
+            //Task t1 = new Task("First task", "First task full description");
+            //Task t2 = new Task("Second task", "Second task full description");
+            //Task t3 = new Task("Third task", "Third task full description");
 
-            taskList.Add(t1);
-            taskList.Add(t2);
-            taskList.Add(t3);
+            //taskList.Add(t1);
+            //taskList.Add(t2);
+            //taskList.Add(t3);
 
             ToDoListBox.ItemsSource = taskList;
             ToDoListBox.DisplayMemberPath = "Name";
@@ -111,5 +115,30 @@ namespace ToDoApplication
             CompleteButton.Content = "Restore";
         }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+
+            BinaryFormatter formatter = new BinaryFormatter();            
+            Stream file = File.OpenWrite(fileName);
+            formatter.Serialize(file, taskList);
+            file.Close();
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            if (File.Exists(fileName))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                Stream file = File.OpenRead(fileName);
+                taskList = formatter.Deserialize(file) as ObservableCollection<Task>;
+                file.Close();
+            }
+
+            NotCompletedRadioButton.IsChecked = true;
+            NotCompletedRadioButton_Checked(sender, e);
+
+        }
     }
 }

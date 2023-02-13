@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDoApplication
 {
+    [Serializable]
     public class Task
     {
 
