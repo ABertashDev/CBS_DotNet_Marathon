@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,17 +22,34 @@ namespace ToDoApplication
     public partial class MainWindow : Window
     {
 
-        string[] tasks = new string[3];
+        List<Task> taskList = new List<Task>();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            tasks[0] = "First task";
-            tasks[1] = "Second task";
-            tasks[2] = "Third task";
+            Task t1 = new Task("First task", "First task full description");
+            Task t2 = new Task("Second task", "Second task full description");
+            Task t3 = new Task("Third task", "Third task full description");
 
-            ToDoListBox.ItemsSource = tasks;
+            taskList.Add(t1);
+            taskList.Add(t2);
+            taskList.Add(t3);
+
+            ToDoListBox.ItemsSource = taskList;
+            ToDoListBox.DisplayMemberPath = "Name";
+
+        }
+
+        private void ToDoListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            
+            Task? selected = ToDoListBox.SelectedItem as Task;
+
+            if (selected != null)
+            {
+                MessageBox.Show(selected.Description);
+            }
 
         }
     }
